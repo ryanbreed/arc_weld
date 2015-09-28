@@ -25,6 +25,14 @@ module ArcWeld
       self.class.send :resource_type
     end
 
+    def parent_ref
+      @parent_ref ||= self.class.toplevel
+    end
+
+    def parent_ref=(containing_group)
+      @parent_ref = containing_group.ref
+    end
+
     module ClassMethods
       def resource_type
         name.split('::')[-1]
@@ -33,7 +41,7 @@ module ArcWeld
 
       def toplevel
         {
-          type: resource_type,
+          type: 'Group',
           id:   format('01000100010001%03d', class_id),
           uri:  class_root
         }

@@ -1,4 +1,5 @@
 require 'pry'
+require 'ipaddr'
 
 require 'arc_weld/version'
 require 'arc_weld/helpers'

@@ -79,7 +79,7 @@ describe ArcWeld::Resource do
     describe '.toplevel' do
       it 'returns a hash structure representing the top-level resource group' do
         top = SpecClasses::BasicResource.toplevel
-        expect(top[:type]).to eq('BasicResource')
+        expect(top[:type]).to eq('Group')
         expect(top[:id]).to eq('01000100010001077')
         expect(top[:uri]).to eq('/All Basic Resources/')
       end

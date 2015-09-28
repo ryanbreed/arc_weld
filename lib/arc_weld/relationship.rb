@@ -1,4 +1,5 @@
 require 'arc_weld/relationship/alternate_interfaces'
+require 'arc_weld/relationship/categories'
 
 module ArcWeld
   module Relationship

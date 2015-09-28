@@ -14,7 +14,7 @@ describe ArcWeld::Asset do
     describe '.toplevel' do 
       it 'returns a top-level resource hash' do
         expect(ArcWeld::Asset.toplevel).to eq({
-          type: 'Asset',
+          type: 'Group',
           id:   '01000100010001004',
           uri:  '/All Assets/'
         })
