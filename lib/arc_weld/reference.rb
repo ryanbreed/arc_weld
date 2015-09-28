@@ -21,23 +21,29 @@ module ArcWeld
       end
     end
 
-    def to_h
-      ref_h = {
-        'ref/' => '',
-        :attributes! => {
-          'ref/' => {
-          :type => type,
-          :uri  => uri
-        }}
-      }
-
+    def identity
       if id.nil?
-        ref_h[:attributes!]['ref/'][:externalID] = externalID
+        {:externalID => externalID}
       else
-        ref_h[:attributes!]['ref/'][:id] = id
+        {:id => id}
       end
+    end    
 
-      ref_h
+    def identity_hash
+      if id.nil?
+        {:@externalID => externalID}
+      else
+        {:@id => id}
+      end
+    end
+
+    def to_h
+     {
+        'ref/' => {
+          :@type => type,
+          :@uri   => uri
+        }.merge(identity_hash)
+      }
     end
 
     def render

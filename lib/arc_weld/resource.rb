@@ -33,6 +33,55 @@ module ArcWeld
       @parent_ref = containing_group.ref
     end
 
+    def identity_hash
+      if id.nil?
+        {:@externalID => externalID}
+      else
+        {:@id => id}
+      end
+    end
+
+    def identity
+      if id.nil?
+        {:externalID => externalID}
+      else
+        {:id => id}
+      end
+    end   
+
+    def property_hash
+      self.class.class_properties.reduce({}) do |memo, key|
+        memo[key] = self.send(key) unless self.send(key).nil?
+        memo
+      end
+    end
+
+    def ref_uri
+      self.class.uri_join(parent_ref.uri, name)
+    end
+
+    def ref
+      ArcWeld::Reference.new({
+        type: resource_type,
+        uri:  ref_uri
+        }.merge(identity)
+      )
+    end
+
+    def to_h
+      resource_h = {
+        resource_type => {
+          'childOf' => { 'list!' => parent_ref.render },
+          :@name    => name
+        }.merge(identity_hash)
+         .merge(property_hash)
+      }
+    end
+    
+    def render
+      Gyoku.xml(to_h, key_converter: :none)
+    end
+
     module ClassMethods
       def resource_type
         name.split('::')[-1]
@@ -40,11 +89,11 @@ module ArcWeld
 
 
       def toplevel
-        {
+        @top ||= ArcWeld::Reference.new(
           type: 'Group',
           id:   format('01000100010001%03d', class_id),
           uri:  class_root
-        }
+        )
       end
 
       def class_id

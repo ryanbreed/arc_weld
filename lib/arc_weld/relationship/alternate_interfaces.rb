@@ -11,6 +11,16 @@ module ArcWeld
           end
         end
       end
+      def alternate_interfaces_relationship
+        {
+          :hasAlternateInterface => {
+            :list! => (alternate_interfaces.map {|a| a.ref.render}).join
+          },
+          :alternateInterfaceOf => {
+            :list! => (alternate_interfaces.map {|a| a.ref.render}).join
+          }
+        }
+      end
     end
   end
 end

@@ -13,7 +13,17 @@ module ArcWeld
     end
 
     def relationship_types
-      self.class_variable_get :@@RELATIONSHIPS
+      self.class.class_variable_get :@@RELATIONSHIPS
+    end
+
+    def relationship_hash
+      relationship_types.reduce({}) do |memo, key|
+        meth = format('%s_relationship',key)
+        if self.respond_to?(meth)
+          memo.merge!(self.send(meth)) unless self.send(meth).nil?
+        end
+        memo
+      end
     end
 
     module ClassMethods
