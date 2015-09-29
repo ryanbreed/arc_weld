@@ -7,8 +7,8 @@ module ArcWeld
     resource_root     '/All Networks/'
     resource_property :description
 
-    has_relationship :customers, multiple: true
-    has_relationship :location
+    has_relationship :has_customer, multiple: true
+    has_relationship :has_location
     
   end
 end

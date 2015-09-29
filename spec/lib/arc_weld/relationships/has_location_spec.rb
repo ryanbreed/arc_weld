@@ -23,7 +23,7 @@ describe ArcWeld::Relationships::HasLocation do
         expect(rel).to be_a(Hash)
         expect(rel.keys).to eq(['hasLocation'])
         expect(rel['hasLocation']).to have_key('list!')
-        expect(rel['hasLocation']['list!']).to eq('<ref type="Location" uri="/All Locations/spec location" externalID="spec_location_000"/>')
+        expect(rel['hasLocation']['list!']).to eq('<ref type="Location" uri="/All Locations/spec location" externalID="spec_location_001"/>')
       end
     end
   end

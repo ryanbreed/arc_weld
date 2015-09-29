@@ -24,11 +24,21 @@ describe ArcWeld::Relationship do
       end
     end
   end
-  context 'adding helpers' do
-    it 'adds defined helper methods'
-  end
-  context 'overriding default accessors' do
-    it 'allows helper module to override default accessor'
+  context 'adding helpers from the relationship module' do
+    let(:rwer) { SpecExtendedClasses::ResourceWithExtendedRelationship }
+    let(:rwer_instance) { rwer.new } 
+    it 'defines instance methods' do
+      expect(rwer_instance).to respond_to :decorated_method
+      expect(rwer_instance.decorated_method).to eq('decorate!')
+    end
+
+    let(:rwora) { SpecExtendedClasses::ResourceWithOverriddenRelationshipAccessor }
+    let(:rwora_instance) { rwora.new }
+    it 'can override default relationship accessor' do
+      expect(rwora_instance.spec_relationship_with_accessor_override).to eq('overridden getter')
+      rwora_instance.spec_relationship_with_accessor_override='wibble'
+      expect(rwora_instance.instance_variable_get :@override).to eq('overridden setter')
+    end
   end
   context 'describing relationships' do
     describe '.register_relationship' do

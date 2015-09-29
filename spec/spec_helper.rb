@@ -4,6 +4,7 @@ require 'arc_weld'
 
 begin
   require 'spec_class_definitions'
+  require 'spec_module_definitions'
   require 'shared_instances'
 rescue NoMethodError
   puts 'not done yet'

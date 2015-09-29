@@ -85,7 +85,19 @@ shared_context 'basic locations' do
     longitude:   '-97.7534014',
     countryName: 'United States',
     regionCode:  'TX',
-    externalID:  'spec_location_000'
+    externalID:  'spec_location_001'
+  )}
+
+  let(:location2) { ArcWeld::Location.new(
+    name:        'spec location 2',
+    description: 'really the same location',
+    countryCode: 'US',
+    city:        'Austin',
+    latitude:    '30.3077609',
+    longitude:   '-97.7534014',
+    countryName: 'United States',
+    regionCode:  'TX',
+    externalID:  'spec_location_002'
   )}
 end
 
@@ -121,6 +133,14 @@ shared_context 'basic customers' do
     addressState:   'Texas',
     country:        'United States'
   )}  
+  let(:customer2) { ArcWeld::Customer.new(
+    name:           'spec customer 2',
+    externalID:     'spec_customer_002',
+    streetAddress1: 'address line 1',
+    streetAddress2: 'address line 2',
+    addressState:   'Texas',
+    country:        'United States'
+  )}
 end
 
 shared_context 'basic networks' do
@@ -129,4 +149,33 @@ shared_context 'basic networks' do
     externalID:  'spec_network_001',
     description: 'spec network'
   )}
+
+  let(:network2) { ArcWeld::Network.new(
+    name:        'spec network 2',
+    externalID:  'spec_network_002',
+    description: 'spec network 2'
+  )}
 end 
+
+shared_context 'basic groups' do
+  let(:group) { ArcWeld::Group.new(
+    name:                'spec group 1',
+    description:         'group for resources under test',
+    externalID:          'spec_group_001',
+    memberReferencePage: 'https://signed.bad.horse'
+  )}
+
+  let(:group2) { ArcWeld::Group.new(
+    name:                'spec group 2',
+    description:         'contained group',
+    externalID:          'spec_group_002',
+    memberReferencePage: 'http://bad.horse'
+  )}
+
+  let(:group3) {ArcWeld::Group.new(
+    name:                'spec group 3',
+    description:         'container group',
+    externalID:          'spec_group_003',
+    memberReferencePage: 'http://www.grumpycats.com'
+  )}
+end

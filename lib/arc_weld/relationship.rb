@@ -1,6 +1,9 @@
+require 'arc_weld/relationships/customer_of'
 require 'arc_weld/relationships/has_alternate_interface'
-require 'arc_weld/relationships/in_category'
+require 'arc_weld/relationships/has_child'
+require 'arc_weld/relationships/has_customer'
 require 'arc_weld/relationships/has_location'
+require 'arc_weld/relationships/in_category'
 require 'arc_weld/relationships/in_zone'
 
 module ArcWeld

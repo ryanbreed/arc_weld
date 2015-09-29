@@ -38,7 +38,7 @@ describe ArcWeld::Location do
     describe '.initialize' do
       it 'initializes from keyword args' do
         expect(location.name).to                eq('spec location')
-        expect(location.externalID).to          eq('spec_location_000')
+        expect(location.externalID).to          eq('spec_location_001')
         expect(location.description).to         eq('Location resource under test')
       end
     end

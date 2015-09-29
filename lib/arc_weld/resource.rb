@@ -57,7 +57,7 @@ module ArcWeld
     end
 
     def ref_uri
-      self.class.uri_join(parent_ref.uri, name)
+      self.class.uri_join(parent_ref.uri, name) unless parent_ref.nil?
     end
 
     def ref

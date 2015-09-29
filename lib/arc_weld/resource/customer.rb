@@ -11,6 +11,6 @@ module ArcWeld
                       :addressState,
                       :country
 
-    has_relationship :in_network
+    has_relationship :customer_of, multiple: true
   end
 end

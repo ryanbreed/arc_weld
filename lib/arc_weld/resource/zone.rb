@@ -7,8 +7,8 @@ module ArcWeld
     resource_root     '/All Zones/'
     resource_property :description, :dynamicAddressing, :startAddress, :endAddress
 
-    has_relationship  :location, :network
-    has_relationship  :categories, multiple: true
+    has_relationship  :has_location, :in_network
+    has_relationship  :in_category, multiple: true
 
     attr_reader :cidr
 

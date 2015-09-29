@@ -48,6 +48,7 @@ guard :rspec, cmd: "bundle exec rspec" do
   watch(rspec.spec_support) { rspec.spec_dir }
   watch('spec/shared_instances.rb') { rspec.spec_dir }
   watch('spec/spec_class_definitions.rb') { rspec.spec_dir }
+  watch('spec/spec_module_definitions.rb') { rspec.spec_dir }
   watch(rspec.spec_files)
 
   # Ruby files
