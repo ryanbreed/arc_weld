@@ -37,6 +37,16 @@ describe ArcWeld::Group do
     end
   end
 
+  context 'referenced from other resources' do
+    it 'returns an ArcWeld reference'
+    it 'has uri based on the contained resources'
+  end
+
+  context 'rendering xml' do
+    it 'renders child relationships'
+    it 'renders resource properties'
+  end
+
   context 'initializing instances' do
     describe '.initialize' do
       it 'initializes from keyword args' do
@@ -47,5 +57,4 @@ describe ArcWeld::Group do
       end
     end
   end
-
 end  

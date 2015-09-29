@@ -1,9 +1,11 @@
 require 'pry'
 require 'ipaddr'
 require 'gyoku'
+require 'nokogiri'
 
 require 'arc_weld/version'
 require 'arc_weld/helpers'
+require 'arc_weld/archive'
 require 'arc_weld/resource'
 require 'arc_weld/relationship'
 require 'arc_weld/reference'
