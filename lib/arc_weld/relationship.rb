@@ -1,5 +1,7 @@
-require 'arc_weld/relationship/alternate_interfaces'
-require 'arc_weld/relationship/categories'
+require 'arc_weld/relationships/has_alternate_interface'
+require 'arc_weld/relationships/in_category'
+require 'arc_weld/relationships/has_location'
+require 'arc_weld/relationships/in_zone'
 
 module ArcWeld
   module Relationship
@@ -40,7 +42,7 @@ module ArcWeld
           register_relationship(sym,options[:multiple])
         end
       end
-      
+
       def class_relationship_types
         class_variable_get :@@RELATIONSHIPS
       end
@@ -51,9 +53,9 @@ module ArcWeld
 
           if multiple
             self.class_eval do
-              define_method("#{name}") do 
+              define_method("#{name}") do
                 val = self.instance_variable_get("@#{name}")
-                if val.nil? 
+                if val.nil?
                   self.instance_variable_set("@#{name}",[])
                 end
                 self.instance_variable_get("@#{name}")
@@ -61,7 +63,7 @@ module ArcWeld
             end
           else
             self.class_eval do
-              define_method("#{name}") do 
+              define_method("#{name}") do
                 self.instance_variable_get("@#{name}")
               end
             end

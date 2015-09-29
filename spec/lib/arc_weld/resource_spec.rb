@@ -2,7 +2,7 @@ require 'spec_helper'
 describe ArcWeld::Resource do
   context 'included in class definitions' do
     # class EmptyResource
-    #   include ArcWeld::Resource 
+    #   include ArcWeld::Resource
     # end
 
     describe '.included' do
@@ -13,7 +13,7 @@ describe ArcWeld::Resource do
         expect(SpecClasses::EmptyResource).to respond_to :resource_root
         expect(SpecClasses::EmptyResource).to respond_to :resource_class_id
       end
-      
+
       it 'extends class instances with ArcWeld::Resource module methods' do
         er=SpecClasses::EmptyResource.new
         expect(er).to respond_to :resource_type
@@ -32,12 +32,12 @@ describe ArcWeld::Resource do
 
       it 'defines a resource_type method on the class' do
         expect(SpecClasses::EmptyResource.resource_type).to eq('EmptyResource')
-      end 
+      end
 
       it 'defines a resource_type method on instances' do
         er = SpecClasses::EmptyResource.new
         expect(er.resource_type).to eq('EmptyResource')
-      end 
+      end
 
       it 'sets a class-level instance variable to track properties' do
         expect(SpecClasses::EmptyResource.class_variable_get :@@RESOURCE_PROPERTIES).to eq([])
@@ -79,9 +79,9 @@ describe ArcWeld::Resource do
     describe '.toplevel' do
       it 'returns a hash structure representing the top-level resource group' do
         top = SpecClasses::BasicResource.toplevel
-        expect(top[:type]).to eq('Group')
-        expect(top[:id]).to eq('01000100010001077')
-        expect(top[:uri]).to eq('/All Basic Resources/')
+        expect(top.type).to eq('Group')
+        expect(top.id).to eq('01000100010001077')
+        expect(top.uri).to eq('/All Basic Resources/')
       end
     end
   end

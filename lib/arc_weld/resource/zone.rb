@@ -26,5 +26,26 @@ module ArcWeld
       @endAddress   = cidr.to_range.to_a.last.to_s
       cidr
     end
+
+    def start_ip
+      IPAddr.new(startAddress)
+    end
+
+    def end_ip
+      IPAddr.new(endAddress)
+    end
+
+    def contains?(addr)
+      comp = case addr
+        when String
+          IPAddr.new(addr)
+        when IPAddr
+          addr
+        else
+          fail ArgumentError, 'can only check containment for IP-like things'
+      end
+
+      start_ip <= comp && end_ip >= comp
+    end
   end
 end
