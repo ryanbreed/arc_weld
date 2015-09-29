@@ -24,6 +24,12 @@ describe ArcWeld::Relationship do
       end
     end
   end
+  context 'adding helpers' do
+    it 'adds defined helper methods'
+  end
+  context 'overriding default accessors' do
+    it 'allows helper module to override default accessor'
+  end
   context 'describing relationships' do
     describe '.register_relationship' do
       let (:rwrm_instance) { SpecClasses::ResourceWithRelationshipMultiples.new }

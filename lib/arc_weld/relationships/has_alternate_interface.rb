@@ -14,11 +14,11 @@ module ArcWeld
       def has_alternate_interface_relationship
         unless has_alternate_interface.empty?
           {
-            :hasAlternateInterface => {
-              :list! => (has_alternate_interface.map {|a| a.ref.render}).join
+            'hasAlternateInterface' => {
+              'list!' => (has_alternate_interface.map {|a| a.ref.render}).join
             },
-            :alternateInterfaceOf => {
-              :list! => (has_alternate_interface.map {|a| a.ref.render}).join
+            'alternateInterfaceOf' => {
+              'list!' => (has_alternate_interface.map {|a| a.ref.render}).join
             }
           }
         end

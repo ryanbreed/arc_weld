@@ -11,10 +11,6 @@ module ArcWeld
       self
     end
 
-    def externalID
-      @externalID ||= name
-    end
-
     def ==(other)
       [:type, :uri, :id, :externalID].all? do |attr|
         self.send(attr) == other.send(attr)

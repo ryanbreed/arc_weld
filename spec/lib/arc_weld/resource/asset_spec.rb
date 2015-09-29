@@ -1,14 +1,7 @@
 require 'spec_helper'
 
 describe ArcWeld::Asset do
-  let(:asset) {ArcWeld::Asset.new(
-    name:        '192.168.1.1 - asset01.local',
-    address:     '192.168.1.1',
-    macAddress:  'be:ef:be:ef:be:ef',
-    hostname:    'asset01.local',
-    description: 'spec asset 1',
-    externalID:  'spec_asset_01'
-  )}
+  include_context 'basic assets'
 
   context 'class-level configuration' do
     describe '.toplevel' do
@@ -49,121 +42,6 @@ describe ArcWeld::Asset do
         expect(asset.hostname).to eq('asset01.local')
         expect(asset.description).to eq('spec asset 1')
         expect(asset.externalID).to eq('spec_asset_01')
-      end
-    end
-  end
-
-  context 'describing relationships' do
-    describe '#location' do
-      it 'has accessor methods defined' do
-        expect(asset).to respond_to :has_location
-        expect(asset).to respond_to :has_location=
-      end
-    end
-    describe '#zone' do
-      it 'has accessor methods defined' do
-        expect(asset).to respond_to :in_zone
-        expect(asset).to respond_to :in_zone=
-      end
-    end
-    describe '#categories' do
-      it 'is initialized with an empty array' do
-        expect(asset.in_category).to eq([])
-      end
-    end
-    describe '#alternate_interfaces' do
-      it 'is initialized with an empty array' do
-        expect(asset.has_alternate_interface).to eq([])
-      end
-    end
-  end
-  context 'relating other to other asset types' do
-    let(:location) { ArcWeld::Location.new(
-      name: 'spec_location',
-      externalID: 'spec_location_000',
-      latitude: 0.0,
-      longitude: 0.0
-    )}
-
-    let(:category1) { ArcWeld::AssetCategory.new(
-      name:       'spec category 01',
-      externalID: 'spec_category_01'
-    )}
-
-    let(:category2) { ArcWeld::AssetCategory.new(
-      name:       'spec category 02',
-      externalID: 'spec_category_02'
-    )}
-
-    let(:zone) { ArcWeld::Zone.new(
-      name:        'spec zone - 192.168.1.0-24',
-      cidr:        '192.168.1.0/24',
-      description: 'spec zone'
-    )}
-
-    describe '#has_location_relationship' do
-      it 'is nil when #has_location is not set' do
-        expect(asset.has_location_relationship).to be_nil
-      end
-      it 'includes the hasLocation relationship when set' do
-        asset.has_location = location
-        rel = asset.has_location_relationship
-        expect(rel).to be_a(Hash)
-        expect(rel.keys).to eq(['hasLocation'])
-        expect(rel['hasLocation']).to have_key('list!')
-        expect(rel['hasLocation']['list!']).to eq('<ref type="Location" uri="/All Locations/spec_location" externalID="spec_location_000"/>')
-      end
-    end
-
-    describe '#in_zone_relationship' do
-      it 'is nil when #in_zone is not set' do
-        expect(asset.in_zone_relationship).to be_nil
-      end
-      it 'includes the hasLocation relationship when set' do
-        asset.in_zone = zone
-        rel = asset.in_zone_relationship
-        expect(rel).to be_a(Hash)
-        expect(rel.keys).to eq(['hasLocation'])
-        expect(rel['hasLocation']).to have_key('list!')
-        expect(rel['hasLocation']['list!']).to eq('<ref type="Location" uri="/All Locations/spec_location" externalID="spec_location_000"/>')
-      end
-    end
-
-    describe '#add_categories' do
-      it 'adds single categories as references' do
-        asset.add_categories(category1)
-        expect(asset.in_category).to eq([category1.ref])
-      end
-
-      it 'adds multiple categories as references' do
-        asset.add_categories(category1, category2)
-        expect(asset.in_category).to eq([category1.ref, category2.ref])
-      end
-
-      it 'does not add the same category more than once' do
-        asset.add_categories(category1)
-        asset.add_categories(category1, category1)
-        expect(asset.in_category).to eq([category1.ref])
-      end
-    end
-
-    describe '#in_category_relationship' do
-      it 'is nil when not in any categories' do
-        expect(asset.in_category_relationship).to be_nil
-      end
-
-      it 'includes the inCategory relationship when populated with single references' do
-        asset.add_categories(category1)
-        rel = asset.in_category_relationship
-        expect(rel).to be_a(Hash)
-        expect(rel.keys).to eq(['inCategory'])
-        expect(rel['inCategory']).to have_key('list!')
-        expect(rel['inCategory']['list!']).to eq("<ref type=\"Group\" uri=\"/All Asset Categories/spec category 01\" externalID=\"spec_category_01\"/>")
-      end
-      it 'includes the inCategory relationship when populated with multiple references' do
-        asset.add_categories(category1, category2)
-        rel = asset.in_category_relationship
-        expect(rel['inCategory']['list!']).to eq("<ref type=\"Group\" uri=\"/All Asset Categories/spec category 01\" externalID=\"spec_category_01\"/><ref type=\"Group\" uri=\"/All Asset Categories/spec category 02\" externalID=\"spec_category_02\"/>")
       end
     end
   end
