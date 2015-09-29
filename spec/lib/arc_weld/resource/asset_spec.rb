@@ -11,19 +11,27 @@ describe ArcWeld::Asset do
   )}
 
   context 'class-level configuration' do
-    describe '.toplevel' do 
-      it 'returns a top-level resource hash' do
-        expect(ArcWeld::Asset.toplevel).to eq({
-          type: 'Group',
-          id:   '01000100010001004',
-          uri:  '/All Assets/'
-        })
+    describe '.toplevel' do
+      it 'returns a top-level resource reference' do
+        expect(ArcWeld::Asset.toplevel).to be_a(ArcWeld::Reference)
       end
+    end
+    describe '.class_id' do
+      it 'returns the resource type id'
+    end
+    describe '.class_root' do
+      it 'returns the resource base uri'
+    end
+    describe '.resource_type' do
+      it 'returns the resource type as a string'
+    end
+    describe '.class_properties' do
+      it 'returns the list of resource properties as an array of symbols'
     end
   end
   context 'initializing instances' do
     describe '.initialize' do
-      
+
 
       it 'initializes from keyword args' do
         expect(asset.name).to eq('192.168.1.1 - asset01.local')
