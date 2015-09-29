@@ -51,33 +51,38 @@ module ArcWeld
         unless class_relationship_types.include?(name)
           class_relationship_types << name
 
-          if multiple
-            self.class_eval do
-              define_method("#{name}") do
-                val = self.instance_variable_get("@#{name}")
-                if val.nil?
-                  self.instance_variable_set("@#{name}",[])
-                end
-                self.instance_variable_get("@#{name}")
-              end
-            end
-          else
-            self.class_eval do
-              define_method("#{name}") do
-                self.instance_variable_get("@#{name}")
-              end
-            end
-          end
-
-          self.class_eval do
-            define_method("#{name}=") do |val|
-              self.instance_variable_set("@#{name}",val)
-            end
-          end
-
           if ArcWeld::Relationships.const_defined? constantize(name)
             self.class_eval "include ArcWeld::Relationships::#{constantize(name)}"
           end
+          # TODO: this is a horrible mess
+          unless self.method_defined? name
+            if multiple
+              self.class_eval do
+                define_method("#{name}") do
+                  val = self.instance_variable_get("@#{name}")
+                  if val.nil?
+                    self.instance_variable_set("@#{name}",[])
+                  end
+                  self.instance_variable_get("@#{name}")
+                end
+              end
+            else
+              self.class_eval do
+                define_method("#{name}") do
+                  self.instance_variable_get("@#{name}")
+                end
+              end
+            end
+          end
+          unless self.method_defined? "#{name}="
+            self.class_eval do
+              define_method("#{name}=") do |val|
+                self.instance_variable_set("@#{name}",val)
+              end
+            end
+          end
+
+
         end
       end
     end

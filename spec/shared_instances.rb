@@ -111,3 +111,22 @@ shared_context 'basic categories' do
     memberReferencePage: 'http://www.grumpycats.com'
   )}
 end
+
+shared_context 'basic customers' do
+  let(:customer) { ArcWeld::Customer.new(
+    name:           'spec customer',
+    externalID:     'spec_customer_001',
+    streetAddress1: 'address line 1',
+    streetAddress2: 'address line 2',
+    addressState:   'Texas',
+    country:        'United States'
+  )}  
+end
+
+shared_context 'basic networks' do
+  let(:network) { ArcWeld::Network.new(
+    name:        'spec network',
+    externalID:  'spec_network_001',
+    description: 'spec network'
+  )}
+end 
