@@ -36,9 +36,9 @@ module ArcWeld
 
     def identity_hash
       if id.nil?
-        {:@externalID => externalID}
+        {'@externalID' => externalID}
       else
-        {:@id => id}
+        {'@id' => id}
       end
     end
 
