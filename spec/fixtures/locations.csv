@@ -1,0 +1,6 @@
+name,externalID,latitude,longitude,city,description
+cota,spec_location_001,30.3077609,-97.7534014,Elroy,Circuit of the Americas
+nurburgring,spec_location_002,50.3460423,6.9660294,Meuspath,Nürburgring Nordschleife
+laguna seca,spec_location_003,36.5842902,-121.7534634,Salinas,Mazda Raceway Laguna Seca
+driveway,spec_location_004,36.5842902,-121.7534634,Austin,Driveway Austin Motorsports
+harris hill,spec_location_005,29.9201124,-97.8744759,San Marcos,Harris Hill Raceway

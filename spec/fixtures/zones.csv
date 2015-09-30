@@ -1,0 +1,5 @@
+name,externalID,description,startAddress,endAddress,dynamicAddressing
+zone_1,spec_zone_001,spec zone 1,192.168.1.0,192.168.1.255,true
+zone_2,spec_zone_002,spec zone 2,192.168.2.0,192.168.2.255,true
+zone_3,spec_zone_003,spec zone 3,192.168.3.0,192.168.3.255,true
+zone_4,spec_zone_004,spec zone 4,192.168.4.0,192.168.4.255,true

@@ -1,0 +1,10 @@
+name,externalID,memberReferencePage,description
+category_1,spec_category_001,http://www.grumpycats.com,spec category 1
+category_2,spec_category_002,http://bad.horse,spec category 2
+category_3,spec_category_003,http://poop.bike,spec category 3
+category_4,spec_category_004,http://wfh.ninja,spec category 4
+category_5,spec_category_005,http://animalsdoingpeoplethings.tumblr.com,spec category 5
+category_6,spec_category_006,,parent category
+category_7,spec_category_007,,child category 1
+category_8,spec_category_008,,child category 2
+category_9,spec_category_009,,coparent category

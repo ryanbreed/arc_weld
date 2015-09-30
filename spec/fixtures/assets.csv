@@ -1,0 +1,13 @@
+name,externalID,address,macAddress,hostname,description
+192.168.0.1 - asset-01,spec_asset_001,192.168.0.1,be:ef:be:ef:00:01,asset-01.local,spec asset 01
+192.168.0.2 - asset-02,spec_asset_002,192.168.0.2,be:ef:be:ef:00:02,asset-02.local,spec asset 02
+192.168.0.3 - asset-03,spec_asset_003,192.168.0.3,be:ef:be:ef:00:03,asset-03.local,spec asset 03
+192.168.1.1 - asset-11,spec_asset_011,192.168.1.1,be:ef:be:ef:00:11,asset-11.local,spec asset 11
+192.168.1.2 - asset-12,spec_asset_012,192.168.1.2,be:ef:be:ef:00:12,asset-12.local,spec asset 12
+192.168.1.3 - asset-13,spec_asset_013,192.168.1.3,be:ef:be:ef:00:13,asset-13.local,spec asset 13
+192.168.2.1 - asset-21,spec_asset_021,192.168.2.1,be:ef:be:ef:00:21,asset-21.local,spec asset 21
+192.168.2.2 - asset-22,spec_asset_022,192.168.2.2,be:ef:be:ef:00:22,asset-22.local,spec asset 22
+192.168.2.3 - asset-23,spec_asset_023,192.168.2.3,be:ef:be:ef:00:23,asset-23.local,spec asset 23
+192.168.3.1 - asset-31,spec_asset_031,192.168.3.1,be:ef:be:ef:00:31,asset-31.local,spec asset 31
+192.168.3.2 - asset-32,spec_asset_032,192.168.3.2,be:ef:be:ef:00:32,asset-32.local,spec asset 32
+192.168.3.3 - asset-33,spec_asset_033,192.168.3.3,be:ef:be:ef:00:33,asset-33.local,spec asset 33
