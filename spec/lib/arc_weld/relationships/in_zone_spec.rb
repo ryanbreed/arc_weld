@@ -3,7 +3,7 @@ require 'spec_helper'
 describe ArcWeld::Relationships::InZone do
   include_context 'basic assets'
   include_context 'basic zones'
-  
+
   context 'describing relationship' do
     describe '.has_relationship :in_zone' do
       it 'defines accessor methods' do
@@ -20,11 +20,15 @@ describe ArcWeld::Relationships::InZone do
     describe '#in_zone=' do
       it 'assigns the related zone if address is between startAddress and endAddress' do
         asset.in_zone = zone
-        expect(asset.in_zone).to eq(zone)       
+        expect(asset.in_zone).to eq(zone)
       end
       it 'raises a RuntimeError if address is not between startAddress and endAddress' do
         expect { asset.in_zone=zone2 }.to raise_error(RuntimeError)
       end
+    end
+    describe '#auto_zone' do
+      it 'picks a zone from an array of candidates'
+      it 'picks nothing if not contained in any candidate'
     end
   end
   context 'accessing relationship properties' do
@@ -43,4 +47,4 @@ describe ArcWeld::Relationships::InZone do
       end
     end
   end
-end  
+end

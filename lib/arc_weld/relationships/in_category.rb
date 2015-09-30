@@ -12,13 +12,13 @@ module ArcWeld
         cats.each { |cat| add_category(cat) }
       end
 
+      def related_in_category_references
+        (in_category.map &:render).join
+      end
+
       def in_category_relationship
         unless in_category.empty?
-          {
-            'inCategory' => {
-              'list!' => (in_category.map &:render).join
-            }
-          }
+          { 'inCategory' => { 'list!' => related_in_category_references } }
         end
       end
     end

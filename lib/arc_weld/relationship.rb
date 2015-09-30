@@ -4,6 +4,7 @@ require 'arc_weld/relationships/has_child'
 require 'arc_weld/relationships/has_customer'
 require 'arc_weld/relationships/has_location'
 require 'arc_weld/relationships/in_category'
+require 'arc_weld/relationships/in_network'
 require 'arc_weld/relationships/in_zone'
 
 module ArcWeld
@@ -24,10 +25,11 @@ module ArcWeld
     def relationship_hash
       relationship_types.reduce({}) do |memo, key|
         meth = format('%s_relationship',key)
-        if self.respond_to?(meth)
-          memo.merge!(self.send(meth)) unless self.send(meth).nil?
+        if self.send(meth).nil?
+          memo
+        else
+          memo.merge(self.send(meth))
         end
-        memo
       end
     end
 

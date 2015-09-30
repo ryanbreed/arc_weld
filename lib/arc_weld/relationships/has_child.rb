@@ -1,12 +1,12 @@
 module ArcWeld
   module Relationships
     module HasChild
-      def related_has_child_resources
+      def related_has_child_references
         has_child.map {|res| res.ref.render }.join
       end
 
       def has_child_relationship
-        {'hasChild' => { 'list!' => related_has_child_resources }}
+        {'hasChild' => { 'list!' => related_has_child_references }}
       end
 
       def add_child(child)
@@ -14,7 +14,7 @@ module ArcWeld
           if containedResourceType.nil?
             self.containedResourceType=child.resource_class_id
           end
-          
+
           if parent_ref.nil?
             self.parent_ref=child.class.toplevel
           end

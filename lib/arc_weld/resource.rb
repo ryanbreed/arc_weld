@@ -2,21 +2,22 @@ module ArcWeld
   module Resource
     def self.included(klass)
       klass.class_eval '@@RESOURCE_PROPERTIES = []'
-        
+
       klass.class_eval do
         extend ClassMethods, ArcWeld::Helpers
-        
-        attr_accessor :name, :id, :externalID
+
+        attr_accessor :name, :id, :externalID, :action
 
         def initialize(*args)
           Hash[*args].each {|k,v| self.send("#{k}=",v)}
+          @action ||= 'insert'
           yield self if block_given?
           self
         end
 
       end
     end
-    
+
     def resource_class_id
       self.class.class_variable_get :@@CLASS_ID
     end
@@ -47,13 +48,17 @@ module ArcWeld
       else
         {:id => id}
       end
-    end   
+    end
 
     def property_hash
       self.class.class_properties.reduce({}) do |memo, key|
         memo[key] = self.send(key) unless self.send(key).nil?
         memo
       end
+    end
+
+    def relationship_hash
+      {} # TODO: damn dirty hack
     end
 
     def ref_uri
@@ -72,12 +77,14 @@ module ArcWeld
       resource_h = {
         resource_type => {
           'childOf' => { 'list!' => parent_ref.render },
-          :@name    => name
+          '@name'   => name,
+          '@action' => action
         }.merge(identity_hash)
          .merge(property_hash)
+         .merge(relationship_hash)
       }
     end
-    
+
     def render
       Gyoku.xml(to_h, key_converter: :none)
     end
@@ -112,8 +119,8 @@ module ArcWeld
         fail ArgumentError, 'resource root must be string' unless str.is_a?(String)
         #puts format('setting resource_root %s on %s', str, self.name)
         norm_str = (str.gsub(%r{\A/?},'').gsub(%r{/?\z},'').split(' ').map &:capitalize).join(' ')
-        self.class_eval "@@RESOURCE_ROOT = \"/#{norm_str}/\"" 
-        norm_str       
+        self.class_eval "@@RESOURCE_ROOT = \"/#{norm_str}/\""
+        norm_str
       end
 
       def resource_class_id(num)
@@ -133,8 +140,8 @@ module ArcWeld
       def register_property(sym)
         #puts format('registering property %s on %s', sym.to_s, self.name)
         unless class_properties.include?(sym)
-          class_properties.push(sym) 
-          self.class_eval "attr_accessor :#{sym}"          
+          class_properties.push(sym)
+          self.class_eval "attr_accessor :#{sym}"
         end
       end
     end

@@ -11,14 +11,14 @@ module ArcWeld
         customers.each { |cust| add_customer(cust) }
       end
 
-      def related_has_customer_resources
+      def related_has_customer_references
         (has_customer.map { |cust| cust.ref.render }).join
       end
 
       def has_customer_relationship
         unless has_customer.empty?
           { 'hasCustomer' => {
-              'list!' => related_has_customer_resources
+              'list!' => related_has_customer_references
           }}
         end
       end

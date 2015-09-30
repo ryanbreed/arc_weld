@@ -28,15 +28,15 @@ describe ArcWeld::Relationships::HasAlternateInterface do
         expect(rel.keys).to eq(['hasAlternateInterface','alternateInterfaceOf'])
         expect(rel['hasAlternateInterface']).to have_key('list!')
         expect(rel['alternateInterfaceOf']).to have_key('list!')
-        expect(rel['hasAlternateInterface']['list!']).to eq("<ref type=\"Asset\" uri=\"/All Assets/192.168.2.2 - asset22.local\" externalID=\"spec_asset_22\"/>")
-        expect(rel['alternateInterfaceOf']['list!']).to eq("<ref type=\"Asset\" uri=\"/All Assets/192.168.2.2 - asset22.local\" externalID=\"spec_asset_22\"/>")
+        expect(rel['hasAlternateInterface']['list!']).to eq("<ref type=\"Asset\" uri=\"/All Assets/192.168.1.2 - asset02.local\" externalID=\"spec_asset_02\"/>")
+        expect(rel['alternateInterfaceOf']['list!']).to eq("<ref type=\"Asset\" uri=\"/All Assets/192.168.1.2 - asset02.local\" externalID=\"spec_asset_02\"/>")
 
       end
       it 'returns the HasAlternateInterface relationship when populated with multiple references' do
         asset.add_interfaces(asset2, asset3)
         rel = asset.has_alternate_interface_relationship
-        expect(rel['hasAlternateInterface']['list!']).to eq("<ref type=\"Asset\" uri=\"/All Assets/192.168.2.2 - asset22.local\" externalID=\"spec_asset_22\"/><ref type=\"Asset\" uri=\"/All Assets/192.168.2.3 - asset23.local\" externalID=\"spec_asset_23\"/>")
-        expect(rel['alternateInterfaceOf']['list!']).to eq("<ref type=\"Asset\" uri=\"/All Assets/192.168.2.2 - asset22.local\" externalID=\"spec_asset_22\"/><ref type=\"Asset\" uri=\"/All Assets/192.168.2.3 - asset23.local\" externalID=\"spec_asset_23\"/>")
+        expect(rel['hasAlternateInterface']['list!']).to eq("<ref type=\"Asset\" uri=\"/All Assets/192.168.1.2 - asset02.local\" externalID=\"spec_asset_02\"/><ref type=\"Asset\" uri=\"/All Assets/192.168.1.3 - asset03.local\" externalID=\"spec_asset_03\"/>")
+        expect(rel['alternateInterfaceOf']['list!']).to eq("<ref type=\"Asset\" uri=\"/All Assets/192.168.1.2 - asset02.local\" externalID=\"spec_asset_02\"/><ref type=\"Asset\" uri=\"/All Assets/192.168.1.3 - asset03.local\" externalID=\"spec_asset_03\"/>")
       end
     end
   end

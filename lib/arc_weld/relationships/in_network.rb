@@ -2,14 +2,13 @@ module ArcWeld
   module Relationships
     module InNetwork
 
-      def related_in_network_resources
+      def related_in_network_references
         (in_network.map { |net| net.ref.render }).join
       end
 
       def in_network_relationship
-        unless in_network.nil?
-          { 'inNetwork' => { 
-            'list!' => related_in_network_resources } }
+        unless in_network.empty?
+          { 'inNetwork' => { 'list!' => related_in_network_references } }
         end
       end
 

@@ -37,7 +37,7 @@ shared_context 'basic assets' do
     externalID:  'spec_asset_01'
   )}
 
-  let(:asset2) {ArcWeld::Asset.new(
+  let(:asset22) {ArcWeld::Asset.new(
     name:        '192.168.2.2 - asset22.local',
     address:     '192.168.2.2',
     macAddress:  'be:ef:be:ef:be:ef',
@@ -46,7 +46,7 @@ shared_context 'basic assets' do
     externalID:  'spec_asset_22'
   )}
 
-  let(:asset3) {ArcWeld::Asset.new(
+  let(:asset23) {ArcWeld::Asset.new(
     name:        '192.168.2.3 - asset23.local',
     address:     '192.168.2.3',
     macAddress:  'be:ef:be:ef:be:ef',
@@ -132,7 +132,7 @@ shared_context 'basic customers' do
     streetAddress2: 'address line 2',
     addressState:   'Texas',
     country:        'United States'
-  )}  
+  )}
   let(:customer2) { ArcWeld::Customer.new(
     name:           'spec customer 2',
     externalID:     'spec_customer_002',
@@ -155,7 +155,7 @@ shared_context 'basic networks' do
     externalID:  'spec_network_002',
     description: 'spec network 2'
   )}
-end 
+end
 
 shared_context 'basic groups' do
   let(:group) { ArcWeld::Group.new(

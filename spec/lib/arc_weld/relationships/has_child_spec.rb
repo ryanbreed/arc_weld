@@ -11,7 +11,7 @@ describe ArcWeld::Relationships::HasChild do
         expect(group).to respond_to :has_child=
       end
       it 'defines helper methods' do
-        expect(group).to respond_to :related_has_child_resources
+        expect(group).to respond_to :related_has_child_references
         expect(group).to respond_to :has_child_relationship
         expect(group).to respond_to :add_child
         expect(group).to respond_to :add_children
