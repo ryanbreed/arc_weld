@@ -24,11 +24,11 @@ module ArcWeld
     end
 
     def add_item(item)
-      resources.push(item) unless resource.include?(item)
+      resources.push(item) unless resources.include?(item)
     end
-    
+
     def add(*items)
-      items.each { |item| add_item(item) }      
+      items.each { |item| add_item(item) }
     end
 
     def dtd(location=ARCHIVE_DTD)
