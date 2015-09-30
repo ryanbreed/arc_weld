@@ -14,7 +14,9 @@ describe ArcWeld::Relationships::HasAlternateInterface do
       end
     end
   end
-
+  context 'relating resources' do
+    it 'reflexively adds relationships to target resources'
+  end
   context 'accessing relationship properties' do
     describe '#has_alternate_interface_relationship' do
       it 'is nil when no alternate interfaces assigned' do

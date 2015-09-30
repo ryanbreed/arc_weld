@@ -3,7 +3,8 @@ module ArcWeld
     module HasCustomer
       def add_customer(cust)
         unless has_customer.include?(cust)
-          has_customer << cust
+          has_customer.push(cust)
+          cust.add_customer_resource(self)
         end
       end
 

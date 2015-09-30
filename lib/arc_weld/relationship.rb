@@ -1,4 +1,5 @@
 require 'arc_weld/relationships/customer_of'
+require 'arc_weld/relationships/location_of'
 require 'arc_weld/relationships/has_alternate_interface'
 require 'arc_weld/relationships/has_child'
 require 'arc_weld/relationships/has_customer'

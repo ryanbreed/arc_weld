@@ -23,6 +23,7 @@ describe ArcWeld::Relationships::HasCustomer do
     end
   end
   context 'relating resources' do
+    it 'reflexively adds relationships on target resources'
     describe '#add_customers' do
       it 'adds single resource' do
         network.add_customers(customer)

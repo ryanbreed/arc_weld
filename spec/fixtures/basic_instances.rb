@@ -1,4 +1,3 @@
-
 asset = ArcWeld::Asset.new(
   name:        '192.168.1.1 - asset01.local',
   address:     '192.168.1.1',
