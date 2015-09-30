@@ -10,6 +10,7 @@ module ArcWeld
     
     has_relationship  :has_child, multiple: true
 
+    # @OVERRIDE
     def ref
       ArcWeld::Reference.new({
           type: 'Group',
@@ -18,8 +19,22 @@ module ArcWeld
       )
     end
     
+    # @OVERRIDE
     def containedResourceType
       resource_class_id
+    end
+
+    # @OVERRIDE
+    def to_h
+      resource_h = {
+        'Group' => {
+          'childOf' => { 'list!' => parent_ref.render },
+          '@name'   => name,
+          '@action' => action
+        }.merge(identity_hash)
+         .merge(property_hash)
+         .merge(relationship_hash)
+      }
     end
   end
 end
