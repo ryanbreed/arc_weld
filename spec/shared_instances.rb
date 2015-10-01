@@ -73,6 +73,13 @@ shared_context 'basic zones' do
     dynamicAddressing: 'false'
   )}
 
+  let(:zone3) { ArcWeld::Zone.new(
+    name:              'spec zone 3 - 192.168.3.0-24',
+    cidr:              '192.168.3.0/24',
+    description:       'spec zone',
+    externalID:        'spec_zone_003',
+    dynamicAddressing: 'false'
+  )}
 end
 
 shared_context 'basic locations' do

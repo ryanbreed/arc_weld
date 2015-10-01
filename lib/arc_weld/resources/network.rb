@@ -9,6 +9,6 @@ module ArcWeld
 
     has_relationship :has_customer, multiple: true
     has_relationship :has_location
-    
+
   end
 end

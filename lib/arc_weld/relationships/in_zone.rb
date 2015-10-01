@@ -8,21 +8,21 @@ module ArcWeld
       end
 
       def auto_zone(*zones)
-        my_zone = zones.select {|z| z.contains?(self.address)}.first
-        self.in_zone = my_zone unless my_zone.nil?
+        my_zone = zones.find {|z| z.contains?(self.address)}
+        self.set_zone(my_zone) unless my_zone.nil?
       end
 
-      def in_zone=(tgt_zone)
-        if tgt_zone.nil? || tgt_zone.contains?(address)
+      def set_zone(tgt_zone)
+        if tgt_zone.contains?(address)
+          if self.staticAddressing.nil?
+            self.staticAddressing = tgt_zone.staticAddressing
+          end
           @in_zone = tgt_zone
-        else
-          fail RuntimeError,
-               format('target zone %s-%s does not contain asset %s address %s',
-                      tgt_zone.startAddress,
-                      tgt_zone.endAddress,
-                      self.name,
-                      self.address)
         end
+      end
+
+      def in_zone=(zone)
+        self.set_zone(zone)
       end
     end
   end

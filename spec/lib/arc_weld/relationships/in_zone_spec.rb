@@ -17,18 +17,30 @@ describe ArcWeld::Relationships::InZone do
   end
 
   context 'relating resources' do
-    describe '#in_zone=' do
-      it 'assigns the related zone if address is between startAddress and endAddress' do
-        asset.in_zone = zone
+    describe '#set_zone' do
+      it 'assigns zone when self.address is contained' do
+        asset.set_zone(zone)
         expect(asset.in_zone).to eq(zone)
       end
-      it 'raises a RuntimeError if address is not between startAddress and endAddress' do
-        expect { asset.in_zone=zone2 }.to raise_error(RuntimeError)
+      it 'sets staticAddressing when assigned to a zone' do
+        asset.set_zone(zone)
+        expect(asset.staticAddressing).to eq('false')
+      end
+      it 'does not assign the zone when self.address is not contained' do
+        asset.set_zone(zone2)
+        expect(asset.in_zone).to be_nil
       end
     end
+
     describe '#auto_zone' do
-      it 'picks a zone from an array of candidates'
-      it 'picks nothing if not contained in any candidate'
+      it 'picks a zone from an array of candidates' do
+        asset21.auto_zone(zone, zone2, zone3)
+        expect(asset21.in_zone).to eq(zone2)
+      end
+      it 'picks nothing if not contained in any candidate' do
+        asset21.auto_zone(zone, zone3)
+        expect(asset21.in_zone).to be_nil
+      end
     end
   end
   context 'accessing relationship properties' do
