@@ -13,3 +13,5 @@ cone assets,spec_category_011,,Asset Resources that are Cones
 danger zones,spec_category_012,,Zones that are dangerous
 red zones,spec_category_013,,Zones that are Red
 green zones,spec_category_014,,Zones that are green
+unzoned assets,spec_category_015,Assets that are unzoned
+zoned assets,spec_category_016,Assets that are zoned

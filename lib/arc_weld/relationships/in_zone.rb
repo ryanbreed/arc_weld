@@ -14,9 +14,19 @@ module ArcWeld
 
       def set_zone(tgt_zone)
         if tgt_zone.contains?(address)
-          if self.staticAddressing.nil?
+          #if self.staticAddressing.nil?
             self.staticAddressing = tgt_zone.staticAddressing
-          end
+          #end
+          #if self.has_location.nil? && (tgt_zone.has_location!=nil)
+            self.has_location = tgt_zone.has_location
+            self.in_network = tgt_zone.in_network
+            asset_group_uri = tgt_zone.ref_uri.gsub('All Zones', 'All Assets')
+            self.parent_ref = ArcWeld::Reference.new(
+              uri: asset_group_uri,
+              externalID: OpenSSL::Digest::MD5.base64digest(asset_group_uri),
+              type: 'Group'
+            )
+          #end
           @in_zone = tgt_zone
         end
       end

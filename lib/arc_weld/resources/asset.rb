@@ -8,7 +8,7 @@ module ArcWeld
     resource_property :description, :staticAddressing, :hostname, :macAddress, :address
 
     has_relationship  :has_location, :in_zone
-    has_relationship  :in_category, :has_alternate_interface, multiple: true
+    has_relationship  :in_category, :has_alternate_interface, :in_network, multiple: true
 
     def safe_name_from(str)
       str.split('.')[0].gsub(%r{[\/\*:\\]},'-').downcase

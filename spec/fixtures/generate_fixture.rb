@@ -130,15 +130,76 @@ def group_locations
   resources[:location].each {|l| enum.next.add_child(l)}
 end
 
+def group_assets
+  zag = ArcWeld::Group.new(
+    name:                  'fixture zones',
+    externalID:            'fixture_zoned_assets',
+    containedResourceType: ArcWeld::Asset.class_id,
+    parent_ref:            ArcWeld::Asset.toplevel
+  )
+  g = ArcWeld::Group.new(
+    name:                  'fixture assets',
+    externalID:            'fixture_group_assets',
+    containedResourceType: ArcWeld::Asset.class_id,
+    parent_ref:            ArcWeld::Asset.toplevel
+  )
+  archive.add(g,zag)
+  unzoned=resources[:asset].select {|a| a.in_zone.nil?}
+  g.add_children(*unzoned)
+end
+
+def group_categories
+  g = ArcWeld::Group.new(
+    name:                  'fixture categories',
+    externalID:            'fixture_group_categories',
+    containedResourceType: ArcWeld::AssetCategory.class_id,
+    parent_ref:            ArcWeld::AssetCategory.toplevel
+  )
+  archive.add(g)
+  g.add_children(*resources[:category])
+end
+
+def categorize_assets
+  acs=CSV.open('spec/fixtures/asset_categories.csv')
+  acs_keys = acs.readline.map {|e| e.split(':')}
+  acs.each do |asset_eid,category_eid|
+    asset=resources[:asset].find {|a| a.externalID == asset_eid}
+    category=resources[:category].find {|c| c.externalID == category_eid}
+    asset.add_category(category)
+  end
+end
+
+def categorize_zones
+  cs=CSV.open('spec/fixtures/zone_categories.csv')
+  cs_keys = cs.readline.map {|e| e.split(':')}
+  cs.each do |zone_eid,category_eid|
+    zone=resources[:zone].find {|z| z.externalID == zone_eid}
+    category=resources[:category].find {|c| c.externalID == category_eid}
+    zone.add_category(category)
+  end
+end
+
+def categorize_groups
+  cs=CSV.open('spec/fixtures/group_categories.csv')
+  cs_keys = cs.readline.map {|e| e.split(':')}
+  cs.each do |res_eid,category_eid|
+    res=archive.resources.find {|r| r.externalID == res_eid}
+    category=resources[:category].find {|c| c.externalID == category_eid}
+    res.add_category(category)
+  end
+end
+
+
 def read_things
   populate_resources
 end
 
 def group_things
-  group_zones
   group_networks
   group_customers
   group_locations
+  group_assets
+  group_categories
 end
 
 def relate_things
@@ -148,14 +209,24 @@ def relate_things
   zone_assets
 end
 
+def categorize_things
+  categorize_assets
+  categorize_zones
+  categorize_groups
+end
+
+
 def write_archive
   File.open('tmp/fixture.xml','w') {|f| f.puts archive.xml.to_s}
 end
 
 def do_it
   read_things
-  group_things
-  relate_things
   archive.add(*resources.values.flatten)
+  group_zones
+  relate_things
+  group_things
+  categorize_things
   write_archive
 end
+

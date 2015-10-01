@@ -15,13 +15,13 @@ describe ArcWeld::Group do
       end
     end
     describe '.class_id' do
-      it 'raises a NameError exception' do
-        expect{ArcWeld::Group.class_id}.to raise_error(NameError)
+      it 'raises a TypeError exception' do
+        expect{ArcWeld::Group.class_id}.to raise_error(TypeError)
       end
     end
     describe '.class_root' do
       it 'raises an exception' do
-        expect{ArcWeld::Group.class_root}.to raise_error(NameError)
+        expect{ArcWeld::Group.class_root}.to raise_error(TypeError)
       end
 
     end

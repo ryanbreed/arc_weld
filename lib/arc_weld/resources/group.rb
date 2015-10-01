@@ -10,6 +10,10 @@ module ArcWeld
       fail TypeError, 'no group resource class_id'
     end
 
+    def self.class_root
+      fail TypeError, 'no group resource class_root'
+    end
+
     def resource_class_id
       fail TypeError, 'no group resource class_id'
     end
