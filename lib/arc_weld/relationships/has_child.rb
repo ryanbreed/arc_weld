@@ -9,18 +9,19 @@ module ArcWeld
         {'hasChild' => { 'list!' => related_has_child_references }}
       end
 
+      def set_attributes_from(child)
+        self.containedResourceType=child.resource_class_id if containedResourceType.nil?
+        self.parent_ref=child.class.toplevel if parent_ref.nil?
+
+      end
+
       def add_child(child)
         unless has_child.include?(child)
-          if containedResourceType.nil?
-            self.containedResourceType=child.resource_class_id
-          end
-
-          if parent_ref.nil?
-            self.parent_ref=child.class.toplevel
-          end
-
-          if child.resource_class_id != self.containedResourceType
-            fail RuntimeError, 'child resource does not match contained types'
+          if child.resource_type != 'Group'
+            set_attributes_from(child)
+            if (child.resource_class_id != self.containedResourceType)
+              fail RuntimeError, 'child resource does not match contained types'
+            end
           end
           self.has_child.push(child)
           child.parent_ref=self.ref

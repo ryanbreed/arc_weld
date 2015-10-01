@@ -1,10 +1,10 @@
 name,externalID,description,cidr,dynamicAddressing
-zone_1,spec_zone_001,spec zone 1,192.168.1.0/24,true
-zone_2,spec_zone_002,spec zone 2,192.168.2.0/24,false
-zone_3,spec_zone_003,spec zone 3,192.168.3.0/24,true
-zone_4,spec_zone_004,spec zone 4,192.168.4.0/24,false
-zone_5,spec_zone_005,spec zone 5,192.168.5.0/24,true
-zone_6,spec_zone_006,spec zone 6,192.168.6.0/24,false
-zone_7,spec_zone_007,spec zone 7,192.168.7.0/24,true
-zone_8,spec_zone_008,spec zone 8,192.168.8.0/24,false
-zone_9,spec_zone_009,spec zone 9,192.168.9.0/24,true
+zone_1 - 192.168.1.0-24,spec_zone_001,spec zone 1,192.168.1.0/24,true
+zone_2 - 192.168.1.0-24,spec_zone_002,spec zone 2,192.168.2.0/24,false
+zone_3 - 192.168.1.0-24,spec_zone_003,spec zone 3,192.168.3.0/24,true
+zone_4 - 192.168.1.0-24,spec_zone_004,spec zone 4,192.168.4.0/24,false
+zone_5 - 192.168.1.0-24,spec_zone_005,spec zone 5,192.168.5.0/24,true
+zone_6 - 192.168.1.0-24,spec_zone_006,spec zone 6,192.168.6.0/24,false
+zone_7 - 192.168.1.0-24,spec_zone_007,spec zone 7,192.168.7.0/24,true
+zone_8 - 192.168.1.0-24,spec_zone_008,spec zone 8,192.168.8.0/24,false
+zone_9 - 192.168.1.0-24,spec_zone_009,spec zone 9,192.168.9.0/24,true
