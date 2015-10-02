@@ -12,21 +12,23 @@ module ArcWeld
         self.set_zone(my_zone) unless my_zone.nil?
       end
 
+      def parent_ref_from_zone(zone)
+        unless zone.parent_ref == ArcWeld::Zone.toplevel
+          asset_group_uri = tgt_zone.ref_uri.gsub('All Zones', 'All Assets')
+          ArcWeld::Reference.new(
+            uri: asset_group_uri,
+            externalID: OpenSSL::Digest::MD5.base64digest(asset_group_uri),
+            type: 'Group'
+          )
+        end
+      end
       def set_zone(tgt_zone)
         if tgt_zone.contains?(address)
-          #if self.staticAddressing.nil?
-            self.staticAddressing = tgt_zone.staticAddressing
-          #end
-          #if self.has_location.nil? && (tgt_zone.has_location!=nil)
-            self.has_location = tgt_zone.has_location
-            self.in_network = tgt_zone.in_network
-            asset_group_uri = tgt_zone.ref_uri.gsub('All Zones', 'All Assets')
-            self.parent_ref = ArcWeld::Reference.new(
-              uri: asset_group_uri,
-              externalID: OpenSSL::Digest::MD5.base64digest(asset_group_uri),
-              type: 'Group'
-            )
-          #end
+          self.staticAddressing = tgt_zone.staticAddressing
+          self.has_location = tgt_zone.has_location
+          self.in_network = tgt_zone.in_network
+          tgt_ref = parent_ref_from_zone(zone)
+          self.parent_ref =  tgt_ref unless tgt_ref.nil?
           @in_zone = tgt_zone
         end
       end
