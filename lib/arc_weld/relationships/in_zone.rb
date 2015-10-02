@@ -27,7 +27,7 @@ module ArcWeld
           self.staticAddressing = tgt_zone.staticAddressing
           self.has_location = tgt_zone.has_location
           self.in_network = tgt_zone.in_network
-          tgt_ref = parent_ref_from_zone(zone)
+          tgt_ref = parent_ref_from_zone(tgt_zone)
           self.parent_ref =  tgt_ref unless tgt_ref.nil?
           @in_zone = tgt_zone
         end
