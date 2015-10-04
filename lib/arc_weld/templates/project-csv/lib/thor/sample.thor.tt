@@ -1,0 +1,7 @@
+class SampleTask < Thor
+  include Thor::Actions
+  desc 'clean', 'Clean up generated files'
+  def clean
+    Dir[File.join('out','*.xml')].each {|f| File.unlink(f)}
+  end
+end
