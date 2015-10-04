@@ -1,5 +1,6 @@
 require 'arc_weld/cli/project'
-require 'arc_weld/cli/relation_reader'
+require 'arc_weld/cli/readers/relation_csv'
+require 'arc_weld/cli/readers/resource_csv'
 require 'json'
 module ArcWeld
   class WeldCli < Thor

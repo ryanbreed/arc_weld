@@ -19,7 +19,7 @@ module ArcWeld
       end
 
       def resource_reader(resource_type)
-        klass = ArcWeld::Readers.const_get(constantize(resource_driver))
+        klass = ArcWeld::Cli::ResourceReaders.const_get(constantize(resource_driver))
         klass.new( path:         resource_input_path(resource_type),
                    target_class: resource_class_for(resource_type) )
       end
@@ -80,7 +80,7 @@ module ArcWeld
 
       def relate_model
         relationships.each do |rel|
-          klass = ArcWeld::RelationReader.const_get(constantize(rel['driver']))
+          klass = ArcWeld::Cli::RelationReaders.const_get(constantize(rel['driver']))
           rel_reader = klass.new(
             path:               File.join(input_dir,rel['file']),
             relationship_type: rel['type'] )
