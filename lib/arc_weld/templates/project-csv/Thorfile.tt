@@ -1,0 +1,9 @@
+require 'arc_weld'
+PROJECT_DIR  = File.expand_path(File.dirname(__FILE__))
+PROJECT_LIB  = File.join(PROJECT_DIR, 'lib')
+PROJECT_THOR = File.join(PROJECT_LIB, 'thor')
+$LOAD_PATH.push(PROJECT_LIB)
+
+Dir[File.join(PROJECT_THOR,'*.thor')].each do |tf|
+  Thor::Util.load_thorfile(tf) 
+end

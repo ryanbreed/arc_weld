@@ -12,4 +12,10 @@ describe ArcWeld::Helpers do
       expect(constantize('some other literal')).to eq('SomeOtherLiteral')
     end
   end
+  describe '#uri_join' do
+    it 'joins strings into a uri-like path'
+    it 'removes internal slashes from the start of component strings'
+    it 'removes internal slashes from the end of component strings'
+    it 'removes trailing slashes'
+  end
 end

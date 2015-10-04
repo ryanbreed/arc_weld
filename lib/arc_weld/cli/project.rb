@@ -78,7 +78,7 @@ module ArcWeld
         end
       end
 
-      def relate_model
+      def assign_model_relations
         relationships.each do |rel|
           klass = ArcWeld::Cli::RelationReaders.const_get(constantize(rel['driver']))
           rel_reader = klass.new(
@@ -90,7 +90,7 @@ module ArcWeld
         end
       end
 
-      def group_resources
+      def assign_resource_groups
         resource_roots['zone'].add_children(*resources['zone'])
 
         zone_assets
@@ -106,8 +106,8 @@ module ArcWeld
       def generate_archive
         resource_roots
         load_resources
-        group_resources
-        relate_model
+        assign_resource_groups
+        assign_model_relations
         archive.add(*resources.values.flatten)
         archive
       end
