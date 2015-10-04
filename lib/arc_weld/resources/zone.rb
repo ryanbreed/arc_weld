@@ -7,7 +7,7 @@ module ArcWeld
     resource_root     '/All Zones/'
     resource_property :description, :dynamicAddressing, :startAddress, :endAddress
 
-    has_relationship  :has_location 
+    has_relationship  :has_location
     has_relationship  :in_network, :in_category, multiple: true
 
     attr_reader :cidr
@@ -42,10 +42,24 @@ module ArcWeld
         when IPAddr
           addr
         else
-          fail ArgumentError, 'can only check containment for IP-like things'
+          nil
       end
+      if ([comp, startAddress, endAddress].any? &:nil?)
+        false
+      else
+        start_ip <= comp && end_ip >= comp
+      end
+    end
 
-      start_ip <= comp && end_ip >= comp
+    def staticAddressing
+      case self.dynamicAddressing
+        when 'true', true
+          'false'
+        when 'false', false
+          'true'
+        else
+          nil
+      end
     end
   end
 end

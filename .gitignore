@@ -9,3 +9,4 @@
 /tmp/
 /vendor/
 .ruby-version
+/out/

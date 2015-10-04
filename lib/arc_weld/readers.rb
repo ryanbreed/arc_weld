@@ -1,1 +1,0 @@
-require 'arc_weld/readers/csv'

@@ -16,8 +16,8 @@ module ArcWeld
         (location_of.map { |resource| resource.ref.render }).join
       end
 
-      def customer_of_relationship
-        unless customer_of.empty?
+      def location_of_relationship
+        unless location_of.empty?
           { 'locationOf' => {
               'list!' => related_location_of_references
           }}

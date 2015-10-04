@@ -17,19 +17,21 @@ module ArcWeld
       end
     end
 
+    def identity_hash
+      if identity=={}
+        {}
+      else
+        Hash[identity.keys.map {|k| format('@%s',k.to_s)}.zip(identity.values)]
+      end
+    end
+
     def identity
-      if id.nil?
+      if id!=nil
+        {:id => id}
+      elsif externalID!=nil
         {:externalID => externalID}
       else
-        {:id => id}
-      end
-    end    
-
-    def identity_hash
-      if id.nil?
-        {:@externalID => externalID}
-      else
-        {:@id => id}
+        {}
       end
     end
 

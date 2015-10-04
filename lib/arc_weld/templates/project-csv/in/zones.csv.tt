@@ -1,0 +1,2 @@
+name,externalID,description,cidr,dynamicAddressing
+"Private 16bit - 192.168.0.0-16",weld_zone_192168,"RFC1918 16bit Private Network",192.168.0.0/16,true

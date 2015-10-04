@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+$LOAD_PATH.push(File.join(File.expand_path(File.dirname(__FILE__)), '..','lib'))
+
+require 'arc_weld'
+
+ArcWeld::WeldCli.start(ARGV)

@@ -1,0 +1,3 @@
+name,externalID,streetAddress1,streetAddress2,description
+Staging,weld_customer_stage,,,Customer resource for staging asset model. You will want to reassign resources from here to your actual target customers, or set a different target customer in the project config.
+Decom,weld_customer_decom,,,Customer resource for decommissioning assets. You can use this resource to disassociate modeled resources from active customers/connectors.

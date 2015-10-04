@@ -1,0 +1,39 @@
+{
+  "name"            : "<%= @config[:name] -%>",
+  "input_dir"          : "in",
+  "output_dir"         : "out",
+  "resource_driver"    : "csv",
+  "resource_root" : {
+    "asset"         : "<%= @config[:name] -%>",
+    "asset_category": "<%= @config[:name ] -%> Categories",
+    "customer"      : "ArcWeld",
+    "location"      : "<%= @config[:name] -%>",
+    "network"       : "ArcWeld",
+    "zone"          : "<%= @config[:name] -%>"
+  },
+  "resource_inputs" : {
+    "asset"          : "assets.csv",
+    "asset_category" : "categories.csv",
+    "customer"       : "customers.csv",
+    "location"       : "locations.csv",
+    "network"        : "networks.csv",
+    "zone"           : "zones.csv"
+  },
+  "relationships" : [
+    {
+      "driver" : "csv",
+      "type"   : "has_location=",
+      "file"   : "zone_locations.csv"
+    },
+    {
+      "driver" : "csv",
+      "type"   : "add_category",
+      "file"   : "group_categories.csv"
+    },
+    {
+      "driver" : "csv",
+      "type"   : "add_customer_resource",
+      "file"   : "customer_groups.csv"
+    }
+  ]
+}
