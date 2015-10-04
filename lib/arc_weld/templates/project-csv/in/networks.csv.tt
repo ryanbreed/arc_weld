@@ -1,0 +1,3 @@
+name,externalID,description
+Staging,weld_net_stage,Staging Network for Generated Resources. You will want to move your generated assets out of here to somewhere more useful. You can also retarget the base_model in the config to point to somewhere directly like Local.
+Decom,weld_net_decom,Decom Network for old resources. You will want to move old/unused resources here to disassociate them from active connectors & customers. This will make deleting them cleaner.

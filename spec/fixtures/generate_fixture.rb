@@ -1,27 +1,27 @@
-def reader 
+def reader
   @resource_readers ||= {
-    :asset =>  ArcWeld::Readers::Csv.new(file_path: 'spec/fixtures/assets.csv', target_class: ArcWeld::Asset),
+    :asset =>  ArcWeld::Readers::Csv.new(path: 'spec/fixtures/assets.csv', target_class: ArcWeld::Asset),
 
-    :category => ArcWeld::Readers::Csv.new(file_path: 'spec/fixtures/categories.csv', target_class: ArcWeld::AssetCategory),
+    :category => ArcWeld::Readers::Csv.new(path: 'spec/fixtures/categories.csv', target_class: ArcWeld::AssetCategory),
 
     :customer => ArcWeld::Readers::Csv.new(
-                   file_path:    'spec/fixtures/customers.csv', 
+                   path:    'spec/fixtures/customers.csv',
                    target_class: ArcWeld::Customer),
 
     :group => ArcWeld::Readers::Csv.new(
-                   file_path:    'spec/fixtures/groups.csv', 
+                   path:    'spec/fixtures/groups.csv',
                    target_class: ArcWeld::Group),
 
     :location => ArcWeld::Readers::Csv.new(
-                   file_path:    'spec/fixtures/locations.csv', 
+                   path:    'spec/fixtures/locations.csv',
                    target_class: ArcWeld::Location),
 
     :network => ArcWeld::Readers::Csv.new(
-                   file_path:    'spec/fixtures/networks.csv', 
+                   path:    'spec/fixtures/networks.csv',
                    target_class: ArcWeld::Network),
 
     :zone => ArcWeld::Readers::Csv.new(
-                   file_path:    'spec/fixtures/zones_cidr.csv', 
+                   path:    'spec/fixtures/zones_cidr.csv', 
                    target_class: ArcWeld::Zone)
   }
 end
@@ -44,7 +44,7 @@ end
 
 def populate_resources
   @resources=nil
-  [:asset,:category,:customer,:location,:network,:zone, :group].each do |r| 
+  [:asset,:category,:customer,:location,:network,:zone, :group].each do |r|
     resources[r].push(*resource(r))
   end
 end
@@ -229,4 +229,3 @@ def do_it
   categorize_things
   write_archive
 end
-

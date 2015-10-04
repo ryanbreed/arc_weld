@@ -1,0 +1,3 @@
+customer:externalID,group:ref_uri
+weld_customer_stage,/All Networks/ArcWeld
+weld_customer_stage,/All Zones/<%= @config[:name] %>

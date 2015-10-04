@@ -1,0 +1,5 @@
+to import your new model:
+
+$MANAGER_HOME/bin/arcsight archive -i \
+  -m manager-host.fqdn \
+  -u username -f generated_model.xml

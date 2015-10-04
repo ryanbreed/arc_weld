@@ -14,7 +14,7 @@ module ArcWeld
 
       def parent_ref_from_zone(zone)
         unless zone.parent_ref == ArcWeld::Zone.toplevel
-          asset_group_uri = tgt_zone.ref_uri.gsub('All Zones', 'All Assets')
+          asset_group_uri = zone.ref_uri.gsub('All Zones', 'All Assets')
           ArcWeld::Reference.new(
             uri: asset_group_uri,
             externalID: OpenSSL::Digest::MD5.base64digest(asset_group_uri),
