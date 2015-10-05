@@ -21,10 +21,14 @@ module ArcWeld
       type: :string,
       default: Dir.pwd,
       desc: 'create project directory here'
+    option :driver,
+      type: :string,
+      default: 'csv',
+      desc: 'driver for reading resources and relations'
     def new(name)
       self.destination_root = options[:dir]
       @config = options.merge(name: name)
-      directory('project-csv',name)
+      directory(format('project-%s',options[:driver]),name)
     end
 
     desc 'generate FILENAME', 'render entire model in FILENAME'
