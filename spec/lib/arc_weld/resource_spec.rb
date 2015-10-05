@@ -51,6 +51,51 @@ describe ArcWeld::Resource do
     end
   end
 
+  context 'relating parent groups' do
+    let(:basic_cls) { SpecClasses::BasicResource }
+    let(:basic) { basic_cls.new(name: 'Batman', externalID: 'because_batman_has_no_parents')}
+    describe '#parent_ref' do
+      it 'refers to toplevel by default' do
+        expect(basic.parent_ref).to eq(basic_cls.toplevel)
+      end
+    end
+    describe '#parent_ref=' do
+      let(:basic_group) {ArcWeld::Group.new(
+        name:                  'Basic Group',
+        description:           'Group of basic resources',
+        containedResourceType: basic_cls.class_id,
+        parent_ref:            basic_cls.toplevel
+      )}
+      it 'relates group resource instances' do
+        basic.parent_ref=basic_group
+        expect(basic.parent_ref).to eq(basic_group.ref)
+      end
+      it 'relates reference instances for type=Group' do
+        basic.parent_ref=basic_group.ref
+        expect(basic.parent_ref).to eq(basic_group.ref)
+      end
+      it 'does not relate reference instances for type!=Group' do
+        foo_ref = ArcWeld::Reference.new(type: 'Foo', uri: '/All Basic Resources/Not Basic Resource Group')
+        basic.parent_ref=foo_ref
+        expect(basic.parent_ref).to eq(basic_cls.toplevel)
+      end
+    end
+    describe '#parent_uri=' do
+      it 'sets parent_ref from a uri' do
+        basic_group_uri = '/All Basic Resources/BasicGroup/Spec'
+        basic_group_ref = ArcWeld::Reference.new(uri: basic_group_uri)
+        basic.parent_uri=basic_group_uri
+        expect(basic.parent_ref).to eq(basic_group_ref)
+      end
+      it 'does not set parent_ref if parent_ref does not match .toplevel uri' do
+        not_basic_group_uri = '/Not Basic Resources/BasicGroup/Spec'
+        not_basic_group_ref = ArcWeld::Reference.new(uri: not_basic_group_uri)
+        basic.parent_uri=not_basic_group_uri
+        expect(basic.parent_ref).to eq(basic_cls.toplevel)
+      end
+    end
+  end
+
   context 'setting class-level attributes' do
     # class BasicResource
     #   include ArcWeld::Resource

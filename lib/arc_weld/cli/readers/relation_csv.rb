@@ -21,10 +21,19 @@ module ArcWeld
           self
         end
 
-        def relate(sources,destinations)
+        def sources(inputs)
+          inputs[src_type]
+        end
+
+        def destinations(inputs)
+          inputs[dst_type]
+        end
+
+        def relate(inputs)
           csv.each do |selected_src, selected_dst|
-            src_instance=sources.find {|s| s.send(src_select)==selected_src}
-            dst_instance=destinations.find {|s| s.send(dst_select)==selected_dst}
+            src_instance=sources(inputs).find {|s| s.send(src_select) == selected_src }
+            dst_instance=destinations(inputs).find {|s| s.send(dst_select) == selected_dst}
+            
             if (src_instance.nil? || dst_instance.nil?)
               STDERR.puts format('could not %s %s/%s',
                                  relationship_type,

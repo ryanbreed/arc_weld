@@ -31,7 +31,14 @@ module ArcWeld
     end
 
     def parent_ref=(containing_group)
-      @parent_ref = containing_group.ref
+      @parent_ref = containing_group.ref if containing_group.ref.type=='Group'
+    end
+
+    def parent_uri=(uri)
+      top_root = Regexp.new(format('\A%s',self.class.toplevel.uri))
+      if top_root.match(uri)
+        @parent_ref = ArcWeld::Reference.new(uri: uri)
+      end
     end
 
     def identity_hash

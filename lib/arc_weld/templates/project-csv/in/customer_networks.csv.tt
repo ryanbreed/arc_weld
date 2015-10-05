@@ -1,0 +1,3 @@
+customer:externalID,network:externalID
+weld_customer_stage,weld_net_stage
+weld_customer_decom,weld_net_decom

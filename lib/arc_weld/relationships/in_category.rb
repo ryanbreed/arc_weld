@@ -2,6 +2,14 @@ module ArcWeld
   module Relationships
     module InCategory
 
+      def add_category_uri(uri)
+        if (uri.match(%r{\A/All Asset Categories/}))
+          ref = ArcWeld::Reference.new(type: 'Group', uri: uri)
+          add_category(ref)
+        end  # silent fail?
+
+      end
+
       def add_category(cat)
         unless in_category.include?(cat.ref)
           in_category << cat.ref

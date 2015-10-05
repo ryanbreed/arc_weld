@@ -1,3 +1,4 @@
-group:externalID,asset_category:externalID
-weld_asset_root,weld_category_assets
-weld_zone_root,weld_category_zones
+group:externalID,uri
+weld_asset_root,/All Asset Categories/<%= @config[:name] -%> Categories/Welded Assets
+weld_zone_root,/All Asset Categories/<%= @config[:name] -%> Categories/Welded Zones
+weld_zone_root,/All Asset Categories/Site Asset Categories/Address Spaces/Protected

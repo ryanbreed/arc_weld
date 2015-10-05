@@ -27,13 +27,18 @@
     },
     {
       "driver" : "csv",
-      "type"   : "add_category",
+      "type"   : "add_network",
+      "file"   : "zonegroup_networks.csv"
+    },
+    {
+      "driver" : "csv_category_uri",
+      "type"   : "add_category_uri",
       "file"   : "group_categories.csv"
     },
     {
       "driver" : "csv",
       "type"   : "add_customer_resource",
-      "file"   : "customer_groups.csv"
+      "file"   : "customer_networks.csv"
     }
   ]
 }
