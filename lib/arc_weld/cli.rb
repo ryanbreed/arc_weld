@@ -1,6 +1,7 @@
 require 'arc_weld'
 require 'arc_weld/cli/project'
 require 'arc_weld/cli/readers/relation_csv'
+require 'arc_weld/cli/readers/relation_csv_category_uri'
 require 'arc_weld/cli/readers/resource_csv'
 require 'openssl'
 require 'json'

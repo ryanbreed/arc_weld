@@ -26,8 +26,8 @@
       "file"   : "zone_locations.csv"
     },
     {
-      "driver" : "csv",
-      "type"   : "add_category",
+      "driver" : "csv_category_uri",
+      "type"   : "add_category_uri",
       "file"   : "group_categories.csv"
     },
     {
