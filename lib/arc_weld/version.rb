@@ -1,3 +1,3 @@
 module ArcWeld
-  VERSION = '0.3.1'
+  VERSION = '0.3.9'
 end

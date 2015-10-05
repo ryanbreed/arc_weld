@@ -14,19 +14,22 @@ module ArcWeld
         ArcWeld.const_get(constantize(resource_type))
       end
 
-      def resource_input_path(resource_type)
-        File.join(self.input_dir, resource_inputs.fetch(resource_type))
+      def input_file(filename)
+        File.join(self.input_dir, filename)
       end
 
-      def resource_reader(resource_type)
+      def resource_reader(resource_type,filename)
         klass = ArcWeld::Cli::ResourceReaders.const_get(constantize(resource_driver))
-        klass.new( path:         resource_input_path(resource_type),
+        klass.new( path:         input_file(filename),
                    target_class: resource_class_for(resource_type) )
       end
 
       def reader
         @readers ||= Hash[
-          resource_inputs.keys.map { |type| [type, resource_reader(type)]}
+          resource_inputs.map  do |resource_type,*filenames| 
+            resource_type_readers = filenames.flatten.map {|filename| resource_reader(resource_type,filename)}
+            [resource_type, resource_type_readers]
+          end
         ]
       end
 
@@ -43,8 +46,8 @@ module ArcWeld
       end
 
       def load_resources
-        reader.each do |type, type_reader|
-          res=type_reader.to_a
+        reader.each do |type, type_readers|
+          res=type_readers.flat_map &:to_a
           resources[type].push(*res)
         end
       end
@@ -91,7 +94,8 @@ module ArcWeld
       end
 
       def assign_resource_groups
-        resource_roots['zone'].add_children(*resources['zone'])
+        ungrouped_zones = resources['zone'].select {|z| z.parent_ref == z.class.toplevel }
+        resource_roots['zone'].add_children(*ungrouped_zones)
 
         zone_assets
 
