@@ -1,5 +1,7 @@
 # ArcWeld
 
+[![Build Status](https://travis-ci.org/ryanbreed/arc_weld.svg?branch=master)](https://travis-ci.org/ryanbreed/arc_weld)
+
 Toolkit for generating ArcSight resources. Useful for fine-grained control
 over the asset model. Currently supports generating the following resource
 types:
