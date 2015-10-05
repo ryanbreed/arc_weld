@@ -85,8 +85,7 @@ module ArcWeld
             path:              File.join(input_dir,rel['file']),
             relationship_type: rel['type']
            )
-          #sources = resources[rel_reader.src_type]
-          #dests   = resources[rel_reader.dst_type]
+
           rel_reader.relate(resources)
         end
       end
