@@ -2,6 +2,12 @@ module ArcWeld
   module Relationships
     module InCategory
 
+      def add_category_uri(*uri_pieces)
+        uri=uri_join(*uri_pieces)
+        ref = ArcWeld::Reference.new(type: 'Group', uri: uri)
+        add_category(ref)
+      end
+
       def add_category(cat)
         unless in_category.include?(cat.ref)
           in_category << cat.ref

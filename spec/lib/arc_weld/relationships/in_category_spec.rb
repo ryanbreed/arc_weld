@@ -40,6 +40,14 @@ describe ArcWeld::Relationships::InCategory do
     end
   end
   context 'relating resources' do
+    describe '#add_category_uri' do
+      it 'adds uri paths as category references' do
+        bare_uri = '/All Asset Categories/spec_categories/Spec URI Category'
+        asset.add_category_uri(bare_uri)
+        expect(asset.in_category.first.uri).to eq(bare_uri)
+      end
+
+    end
     describe '#add_categories' do
       it 'adds single categories as references' do
         asset.add_categories(category)
