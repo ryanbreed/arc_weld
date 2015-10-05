@@ -1,4 +1,3 @@
-require 'pry'
 require 'ipaddr'
 require 'gyoku'
 require 'nokogiri'
