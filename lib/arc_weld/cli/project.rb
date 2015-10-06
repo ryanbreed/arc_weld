@@ -94,22 +94,19 @@ module ArcWeld
       end
 
       def assign_resource_groups
-        ungrouped_zones = resources['zone'].select {|z| z.parent_ref == z.class.toplevel }
-        resource_roots['zone'].add_children(*ungrouped_zones)
-
-        zone_assets
-
         unzoned = resources['asset'].select {|a| a.in_zone.nil?}
         resource_roots['asset'].add_children(*unzoned)
 
-        %w{ network customer location asset_category }.each do |type|
-          resource_roots[type].add_children(*resources[type])
+        %w{ network customer location asset_category zone }.each do |type|
+          unrooted = resources[type].select {|instance| instance.parent_ref==instance.class.toplevel }
+          resource_roots[type].add_children(*unrooted)
         end
       end
 
       def generate_archive
         resource_roots
         load_resources
+        zone_assets
         assign_resource_groups
         assign_model_relations
         archive.add(*resources.values.flatten)
