@@ -34,11 +34,14 @@ module ArcWeld
             src_instance=sources(inputs).find {|s| s.send(src_select) == selected_src }
             dst_instance=destinations(inputs).find {|s| s.send(dst_select) == selected_dst}
             
-            if (src_instance.nil? || dst_instance.nil?)
-              STDERR.puts format('could not %s %s/%s',
+            if src_instance.nil?
+              STDERR.puts format('could not %s from %s to %s (source resource not found)',
                                  relationship_type,
-                                 selected_src,
-                                 selected_dst)
+                                 selected_src, selected_dst)
+            elsif dst_instance.nil?
+              STDERR.puts format('could not %s from %s to %s (destination resource not found)',
+                                 relationship_type,
+                                 selected_src, selected_dst)
             else
                src_instance.send(relationship_type,dst_instance)
             end

@@ -34,7 +34,7 @@ describe ArcWeld::Archive do
   
   describe '#render' do
     it 'renders archives with no resources to the base template' do
-      expect(empty_archive.render).to eq("<archive buildVersion=\"6.5.1.1952.1\" buildTime=\"3-6-2015_17:2:26\" createTime=\"08-19-2015_11:00:00\"><ArchiveCreationParameters><action>insert</action><excludeReferenceIDs/><format>default</format><formatRoot/><include/></ArchiveCreationParameters></archive>")
+      expect(empty_archive.render).to match("<include/></ArchiveCreationParameters></archive>")
     end
   end
 

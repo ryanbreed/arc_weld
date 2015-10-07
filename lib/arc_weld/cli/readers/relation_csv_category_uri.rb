@@ -32,8 +32,8 @@ module ArcWeld
             src_instance=sources(inputs).find {|s| s.send(src_select)==selected_src}
 
             if (src_instance.nil?)
-              STDERR.puts format('could not %s %s/%s',
-                                 relationship_type,
+              STDERR.puts format('could not add category uri %s to %s (resource nil)',
+                                 category_uri,
                                  selected_src)
               next
             end
