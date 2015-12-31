@@ -13,9 +13,17 @@ describe ArcWeld::Helpers do
     end
   end
   describe '#uri_join' do
-    it 'joins strings into a uri-like path'
-    it 'removes internal slashes from the start of component strings'
-    it 'removes internal slashes from the end of component strings'
-    it 'removes trailing slashes'
+    it 'joins strings into a uri-like path' do
+      expect(uri_join('foo','bar','baz')).to eq('/foo/bar/baz')
+    end
+    it 'removes internal slashes from the start of component strings' do
+      expect(uri_join('/foo','/bar','/baz')).to eq('/foo/bar/baz')
+    end
+    it 'removes internal slashes from the end of component strings' do
+      expect(uri_join('foo/','bar/','baz/')).to eq('/foo/bar/baz')
+    end
+    it 'removes trailing slashes' do
+      expect(uri_join('foo','bar','baz/')).to eq('/foo/bar/baz')
+     end
   end
 end

@@ -12,31 +12,52 @@ describe ArcWeld::Archive do
   let(:empty_archive) { ArcWeld::Archive.new( createTime: archive_ctime ) }
 
   describe '#archive_creation_parameters' do
-    it 'renders without an include list for archives with no resources'
-    it 'renders an include list for archives with resources'
+    it 'renders without an include list for archives with no resources' do
+      expect(empty_archive.archive_creation_parameters).to eq("<ArchiveCreationParameters><action>insert</action><excludeReferenceIDs/><format>default</format><formatRoot/><include/></ArchiveCreationParameters>")
+    end
+    it 'renders an include list for archives with resources' do
+      empty_archive.add(asset)
+      expect(empty_archive.archive_creation_parameters).to match(asset.ref.render)
+    end
   end
 
   describe '#resource_content' do
-    it 'renders single resources'
-    it 'renders multiple resources' 
+    it 'renders single resources' do
+      empty_archive.add(asset)
+      expect(empty_archive.resource_content).to eq(asset.render)
+    end
+    it 'renders multiple resources' do
+      empty_archive.add(asset,asset2)
+      expect(empty_archive.resource_content).to eq(asset.render + asset2.render)
+    end
   end
   
   describe '#render' do
-    it 'renders archives with no resources to the base template'
+    it 'renders archives with no resources to the base template' do
+      expect(empty_archive.render).to match("<include/></ArchiveCreationParameters></archive>")
+    end
   end
 
   describe '#dtd' do
-    it 'renders the default dtd path if not explicitly set'
-    it 'can set arbitrary path locations' 
+    it 'renders the default dtd path if not explicitly set' do
+      expect(empty_archive.dtd).to eq("<!DOCTYPE archive SYSTEM \"../../schema/xml/archive/arcsight-archive.dtd\">")
+    end
+    it 'can set arbitrary path locations' do
+      empty_archive.dtd_location='/somepath/to/arcsight-archive.dtd'
+      expect(empty_archive.dtd).to eq('<!DOCTYPE archive SYSTEM "/somepath/to/arcsight-archive.dtd">')
+    end
+
   end
   context 'adding resources' do
     describe '#add' do
-      it 'adds single resources to the @resources instance attribute' 
-      it 'adds multiple resources to the @resources instance attribute'
-    end
-    describe '#include_list' do
-      it 'renders group resource references in the include list'
-      it 'renders multiple resource type references in the include list'
+      it 'adds single resources to the @resources instance attribute' do
+        empty_archive.add(asset)
+        expect(empty_archive.resources).to eq([asset])
+      end
+      it 'adds multiple resources to the @resources instance attribute' do
+        empty_archive.add(asset,asset2)
+        expect(empty_archive.resources).to eq([asset,asset2])
+      end
     end
   end
 

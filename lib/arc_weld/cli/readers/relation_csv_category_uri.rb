@@ -30,13 +30,17 @@ module ArcWeld
         def relate(inputs)
           csv.each do |selected_src, category_uri|
             src_instance=sources(inputs).find {|s| s.send(src_select)==selected_src}
-            
+
             if (src_instance.nil?)
-              STDERR.puts format('could not %s %s/%s',
-                                 relationship_type,
+              STDERR.puts format('could not add category uri %s to %s (resource nil)',
+                                 category_uri,
                                  selected_src)
+              next
+            end
+            if ac_resource = inputs['asset_category'].find {|ac| ac.ref_uri==category_uri}
+              src_instance.add_category(ac_resource)
             else
-               src_instance.send(relationship_type,category_uri)
+              src_instance.send(relationship_type,category_uri)
             end
           end
         end

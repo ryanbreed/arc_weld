@@ -5,4 +5,4 @@ if Dir.exist?(local_lib=File.join(Dir.pwd,'lib'))
   Dir[File.join(local_lib,'*.rb')]. each {|local_lib| require local_lib }
 end
 
-ArcWeld::WeldCli.start(ARGV)
+ArcWeld::Cli.start(ARGV)
