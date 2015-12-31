@@ -39,12 +39,23 @@ describe ArcWeld::Group do
 
   context 'referenced from other resources' do
     it 'returns an ArcWeld reference'
-    it 'has uri based on the contained resources'
+    it 'has uri based on the contained resources' do
+      group2.add_children(network,network2)
+      expect(group2.ref_uri).to eq('/All Networks/spec group 2')
+      group3.add_children(customer,customer2)
+      expect(group3.ref_uri).to eq('/All Customers/spec group 3')
+    end
   end
 
   context 'rendering xml' do
-    it 'renders child relationships'
-    it 'renders resource properties'
+    it 'renders child relationships' do
+      group2.add_children(network,network2)
+      expect(group2.render).to eq("<Group name=\"spec group 2\" action=\"insert\" externalID=\"spec_group_002\"><childOf><list><ref type=\"Group\" uri=\"/All Networks/\" id=\"01000100010001040\"/></list></childOf><containedResourceType>40</containedResourceType><description>contained group</description><memberReferencePage>http://bad.horse</memberReferencePage><hasChild><list><ref type=\"Network\" uri=\"/All Networks/spec group 2/spec network\" externalID=\"spec_network_001\"/><ref type=\"Network\" uri=\"/All Networks/spec group 2/spec network 2\" externalID=\"spec_network_002\"/></list></hasChild></Group>")
+    end
+    it 'renders resource properties' do
+      group2.add_children(network,network2)
+      expect(group2.render).to eq("<Group name=\"spec group 2\" action=\"insert\" externalID=\"spec_group_002\"><childOf><list><ref type=\"Group\" uri=\"/All Networks/\" id=\"01000100010001040\"/></list></childOf><containedResourceType>40</containedResourceType><description>contained group</description><memberReferencePage>http://bad.horse</memberReferencePage><hasChild><list><ref type=\"Network\" uri=\"/All Networks/spec group 2/spec network\" externalID=\"spec_network_001\"/><ref type=\"Network\" uri=\"/All Networks/spec group 2/spec network 2\" externalID=\"spec_network_002\"/></list></hasChild></Group>")
+    end
   end
 
   context 'initializing instances' do

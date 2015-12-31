@@ -17,19 +17,45 @@ describe ArcWeld::Reference do
   end
   context 'comparing instances' do
     describe '#==' do
-      it 'returns true for different instances with identical attributes'
-      it 'returns false for instances with differing id attributes'
-      it 'returns false for instances with differing externalID attributes'
-      it 'returns false for instances with differing uri attributes'
-      it 'returns false for instances with differing type attributes'
+      it 'returns true for different instances with identical attributes' do
+        ref_one = ArcWeld::Reference.new( type: 'SpecRef', id: 'zazzle', externalID: 'ext_zazzle', uri: '/All SpecRefs/Zazzle')
+        ref_two = ArcWeld::Reference.new( type: 'SpecRef', id: 'zazzle', externalID: 'ext_zazzle', uri: '/All SpecRefs/Zazzle')
+        expect(ref_one).to eq(ref_two)
+      end
+      it 'returns false for instances with differing id attributes' do
+        ref_one = ArcWeld::Reference.new( type: 'SpecRef', id: 'zazzle_1', externalID: 'ext_zazzle', uri: '/All SpecRefs/Zazzle')
+        ref_two = ArcWeld::Reference.new( type: 'SpecRef', id: 'zazzle_2', externalID: 'ext_zazzle', uri: '/All SpecRefs/Zazzle')
+        expect(ref_one).not_to eq(ref_two)
+      end
+      it 'returns false for instances with differing externalID attributes' do
+        ref_one = ArcWeld::Reference.new( type: 'SpecRef', id: 'zazzle', externalID: 'ext_zazzle_1', uri: '/All SpecRefs/Zazzle')
+        ref_two = ArcWeld::Reference.new( type: 'SpecRef', id: 'zazzle', externalID: 'ext_zazzle_2', uri: '/All SpecRefs/Zazzle')
+        expect(ref_one).not_to eq(ref_two)
+      end
+      it 'returns false for instances with differing uri attributes' do
+        ref_one = ArcWeld::Reference.new( type: 'SpecRef', id: 'zazzle', externalID: 'ext_zazzle', uri: '/All SpecRefs/Zazzle/one')
+        ref_two = ArcWeld::Reference.new( type: 'SpecRef', id: 'zazzle', externalID: 'ext_zazzle', uri: '/All SpecRefs/Zazzle/two')
+        expect(ref_one).not_to eq(ref_two)
+      end
+      it 'returns false for instances with differing type attributes' do
+        ref_one = ArcWeld::Reference.new( type: 'SpecRef1', id: 'zazzle', externalID: 'ext_zazzle', uri: '/All SpecRefs/Zazzle')
+        ref_two = ArcWeld::Reference.new( type: 'SpecRef2', id: 'zazzle', externalID: 'ext_zazzle', uri: '/All SpecRefs/Zazzle')
+        expect(ref_one).not_to eq(ref_two)
+      end
     end
   end
   context 'rendering xml' do
     describe '#identity' do
-      it 'renders the identity attribute'
+      it 'renders the identity attribute' do
+        ref_one = ArcWeld::Reference.new( type: 'SpecRef', id: 'zazzle', externalID: 'ext_zazzle', uri: '/All SpecRefs/Zazzle')
+        expect(ref_one.render).to eq("<ref type=\"SpecRef\" uri=\"/All SpecRefs/Zazzle\" id=\"zazzle\"/>")
+      end
     end
     describe '#identity_hash' do
-      it 'renders the identity attribute as a gyoku attrubute hash'
+      it 'renders the identity attribute as a gyoku attrubute hash' do
+        ref_one = ArcWeld::Reference.new( type: 'SpecRef', id: 'zazzle', externalID: 'ext_zazzle', uri: '/All SpecRefs/Zazzle')
+        expect(ref_one.identity_hash).to eq({"@id"=>"zazzle"})
+      end
     end
 
     describe '#render' do
